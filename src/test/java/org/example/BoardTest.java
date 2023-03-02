@@ -46,6 +46,15 @@ class BoardTest {
 
         assertFalse(isCorrect);
     }
+
+    @Test
+    void placingCorrectlyShipTest() {
+        Board board = new Board();
+        board.placeShip(0,0, Direction.RIGHT, Ship.THREE_MASTED);
+
+        System.out.println(board);
+
+    }
 }
 
 
