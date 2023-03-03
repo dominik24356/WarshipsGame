@@ -48,12 +48,18 @@ class BoardTest {
     }
 
     @Test
-    void placingCorrectlyShipTest() {
+    void placingCorrectlyOneShipTest() {
         Board board = new Board();
-        board.placeShip(0,0, Direction.RIGHT, Ship.THREE_MASTED);
+        board.addShip(0,0, Direction.RIGHT, Ship.THREE_MASTED);
 
         System.out.println(board);
+    }
 
+    @Test
+    void placingIncorrectlyOneShipTest() {
+        Board board = new Board();
+        board.addShip(1,1, Direction.LEFT, Ship.THREE_MASTED);
+        System.out.println(board);
     }
 }
 

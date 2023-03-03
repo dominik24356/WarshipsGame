@@ -20,23 +20,99 @@ public class Board {
         this.fields = fields;
     }
 
-    public void placeShip(int startingColumn, int startingRow, Direction direction, Ship ship) {
+    private void placeShip(int startingRow, int startingColumn, Direction direction, Ship ship) {
+        // placing ship on board
         for (int i = 0; i < ship.getLength(); i++) {
             switch (direction) {
                 case UP -> {
-                    fields[startingRow - i][startingColumn] = Field.SHIP;
+                    putShipField(startingRow - i, startingColumn);
                 }
                 case DOWN -> {
-                    fields[startingRow + i][startingColumn] = Field.SHIP;
+                    putShipField(startingRow + i, startingColumn);
                 }
                 case LEFT -> {
-                    fields[startingRow][startingColumn - i] = Field.SHIP;
+                    putShipField(startingRow, startingColumn - i);
                 }
                 case RIGHT -> {
-                    fields[startingRow][startingColumn + i] = Field.SHIP;
+                    putShipField(startingRow, startingColumn + i);
                 }
             }
         }
+
+        // creating buffered zone around ship
+        for (int i = 0; i < ship.getLength()+2; i++) {
+            switch (direction) {
+                case UP -> {
+                    putBufferedField(startingRow + 1 - i, startingColumn + 1);
+                    putBufferedField(startingRow + 1 - i, startingColumn - 1);
+                    putBufferedField(startingRow + 1 - i, startingColumn);
+                }
+                case DOWN -> {
+                    putBufferedField(startingRow - 1 + i, startingColumn - 1);
+                    putBufferedField(startingRow - 1 + i, startingColumn + 1);
+                    putBufferedField(startingRow - 1 + i, startingColumn);
+                }
+                case LEFT -> {
+                    putBufferedField(startingRow + 1, startingColumn + 1 - i);
+                    putBufferedField(startingRow - 1, startingColumn + 1 - i);
+                    putBufferedField(startingRow, startingColumn + 1 - i);
+                }
+                case RIGHT -> {
+                    putBufferedField(startingRow + 1, startingColumn - 1 + i);
+                    putBufferedField(startingRow - 1, startingColumn - 1 + i);
+                    putBufferedField(startingRow, startingColumn - 1 + i);
+                }
+            }
+        }
+    }
+
+    private void putBufferedField(int row, int column) {
+        if (canPutField(row, column)) {
+            fields[row][column] = Field.BUFFER_ZONE;
+        }
+    }
+
+    private void putShipField(int row, int column) {
+            fields[row][column] = Field.SHIP;
+    }
+
+    private boolean canPutField(int row, int column) {
+
+        if (column > 10 || row > 10 || row < 0 || column < 0) {
+            return false;
+        }
+
+        boolean result = true;
+        Field currentField = fields[row][column];
+        if (!currentField.equals(Field.SEA)) {
+            result = false;
+        }
+
+        return result;
+    }
+
+
+    public void addShip(int startingRow, int startingColumn, Direction direction, Ship ship) {
+        if (canAddShip(startingRow, startingColumn, direction, ship)) {
+            placeShip(startingRow, startingColumn, direction, ship);
+        }
+    }
+
+    private boolean canAddShip(int startingRow, int startingColumn, Direction direction, Ship ship) {
+        boolean result = true;
+        for (int i = 0; i < ship.getLength(); i++) {
+            switch (direction) {
+                case UP -> result = canPutField(startingRow - i, startingColumn);
+                case DOWN -> result = canPutField(startingRow + i, startingColumn);
+                case LEFT -> result = canPutField(startingRow, startingColumn - i);
+                case RIGHT -> result = canPutField(startingRow, startingColumn + i);
+            }
+            if (!result) {
+                break;
+            }
+        }
+
+        return result;
     }
 
     @Override
