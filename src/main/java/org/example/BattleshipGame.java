@@ -6,7 +6,9 @@ public class BattleshipGame {
 
     private final Board gameBoard = new Board();
 
-
+    public Board getGameBoard() {
+        return gameBoard;
+    }
 
     protected void automaticShipDeployment() {
         Random random = new Random();
@@ -15,12 +17,12 @@ public class BattleshipGame {
 
         for (Ship ship : ships) {
             for (int i = 0; i < ship.getNumOfShips(); i++) {
-                placeShip(random, ship);
+                placeShipRandomly(random, ship);
             }
         }
     }
 
-    private void placeShip(Random random, Ship ship) {
+    private void placeShipRandomly(Random random, Ship ship) {
         boolean canAdd = false;
         do {
             int randomRow = random.nextInt(10);
@@ -35,6 +37,8 @@ public class BattleshipGame {
             }
         } while (!canAdd);
     }
+
+
 
     @Override
     public String toString() {
