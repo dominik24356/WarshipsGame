@@ -2,8 +2,6 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -50,7 +48,7 @@ class BoardTest {
     @Test
     void placingCorrectlyOneShipTest() {
         Board board = new Board();
-        board.addShip(0,0, Direction.RIGHT, Ship.THREE_MASTED);
+        board.addShip(0,0, Direction.RIGHT, Ship.SHIP_OF_SIZE_3);
 
         System.out.println(board);
     }
@@ -58,9 +56,12 @@ class BoardTest {
     @Test
     void placingIncorrectlyOneShipTest() {
         Board board = new Board();
-        board.addShip(1,1, Direction.LEFT, Ship.THREE_MASTED);
+        board.addShip(1,1, Direction.LEFT, Ship.SHIP_OF_SIZE_3);
         System.out.println(board);
     }
+
+
+
 }
 
 

@@ -78,7 +78,7 @@ public class Board {
 
     private boolean canPutField(int row, int column) {
 
-        if (column > 10 || row > 10 || row < 0 || column < 0) {
+        if (column >= 10 || row >= 10 || row < 0 || column < 0) {
             return false;
         }
 
@@ -98,7 +98,7 @@ public class Board {
         }
     }
 
-    private boolean canAddShip(int startingRow, int startingColumn, Direction direction, Ship ship) {
+    protected boolean canAddShip(int startingRow, int startingColumn, Direction direction, Ship ship) {
         boolean result = true;
         for (int i = 0; i < ship.getLength(); i++) {
             switch (direction) {

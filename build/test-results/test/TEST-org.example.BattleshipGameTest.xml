@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.BattleshipGameTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-05T16:04:01" hostname="LAPTOP-69CBV319" time="0.019">
+  <properties/>
+  <testcase name="automaticDeploymentOfAllShipsTest()" classname="org.example.BattleshipGameTest" time="0.019"/>
+  <system-out><![CDATA[O O O X X O O O O O 
+O O O O O O O O X O 
+O X X X O O O O O O 
+O O O O O O O X O O 
+O O X X O O O X O O 
+O O O O O X O X O O 
+O X O O O O O O O O 
+O X O O O O O O O X 
+O O O X X X X O O O 
+O O O O O O O O X O 
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
